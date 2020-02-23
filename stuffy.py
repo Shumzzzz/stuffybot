@@ -50,4 +50,4 @@ async def on_voice_state_update(before, after ):
 async def on_member_join(rolee):
     role = discord.utils.get(rolee.guild.roles, name = "NovicE")
     await rolee.add_roles(role)
-bott.run(TOKEN)
+bott.run(TOKE)
