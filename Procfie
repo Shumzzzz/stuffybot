@@ -1,1 +1,1 @@
-worker: stuffy.py
+worker: python stuffy.py
