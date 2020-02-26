@@ -3,9 +3,8 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 import asyncio
 import random
-import os
 
-TOKEN = 'NjgwODE5MzgxNjcyMDgzNTM2.XlV4Nw.b78xGe23RsCzcPmFMu0THQ9RRNk'
+TOKEN = 'NjgwODE5MzgxNjcyMDgzNTM2.Xla7WQ.hk2sJy1KMbMceL8yct-JDnMHJXY'
 
 bott = Bot(command_prefix='!') #инициализируем бота с префиксом '!'
 @bott.command(pass_context=True) #разрешаем передавать агрументы
@@ -28,26 +27,49 @@ async def rules(rule):
 контент NSFW(Для этого есть отдельный канал!)\n\nОстальные условия в Discord Условия использования и Руководящие принципы сообщества также действуют там, где это применимо.Правила могут изменяться без ведома участников сервера!')
 
 @bott.command(pass_context=True)
-async def invitelink(link):
-    await link.channel.send('Ссылка: https://discord.gg/sY7y3n6')
+async def invlink(link):
+    await link.channel.send('Ссылка: https://discord.gg/p4MrpbT')
 
 @bott.command(pass_context=True)
-async def coinflip(coin):
+async def coin(coin):
     variable = [
         "Выпал орёл!",
         "Выпала решка!",]
     await coin.channel.send("{}".format(random.choice(variable)))
 
-@bott.event
-async def on_voice_state_update(before, after ):
-    role = discord.utils.get(after.server.roles, name="NovicE")
-    if not before.voice.voice_channel and after.voice.voice_channel:
-        await bott.add_roles(after, role)
-    elif before.voice.voice_channel and not after.voice.voice_channel:
-        await bott.remove_roles(after, role)
 
 @bott.event
 async def on_member_join(rolee):
     role = discord.utils.get(rolee.guild.roles, name = "NovicE")
     await rolee.add_roles(role)
+
+@bott.command(pass_context=True)
+async def ping(pingg):
+    await pingg.channel.send('Pong!')
+
+@bott.command()
+@commands.has_any_role('Silencer', 'AdministratoR','Administration Supervisor','Curator','Co-ManageR','ManageR','Co-OwneR','OwneR')
+async def mute(ctx, member: discord.Member = None):
+    role = discord.utils.get(ctx.guild.roles, name = 'Muted')
+    if not member:
+        await ctx.send('Вы не указали пользователя')
+        return
+    await member.add_roles(role)
+    await ctx.send(str(member) + " Был замучен.")
+
+@bott.command()
+@commands.has_any_role('Silencer', 'AdministratoR','Administration Supervisor','Curator','Co-ManageR','ManageR','Co-OwneR','OwneR')
+async def unmute(ctx, member: discord.Member = None):
+    role = discord.utils.get(ctx.guild.roles, name = 'Muted')
+    if not member:
+        await ctx.send('Вы не указали пользователя')
+        return
+    await member.remove_roles(role)
+    await ctx.send(str(member) + " Снова может говорить!")
+
+
+@bott.command(pass_contesxt=True)
+async def commands(comm):
+    await comm.channel.send('Список комманд:\n• !coin - Бросить монетку.\n• !rules - Правила сервера.\n• !invlink - Ссылка для приглашения друзей.\n• !help - для вызова этого списка.')
+
 bott.run(TOKEN)
