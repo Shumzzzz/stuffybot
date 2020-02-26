@@ -4,7 +4,7 @@ from discord.ext.commands import Bot
 import asyncio
 import random
 
-TOKEN = 'NjgwODE5MzgxNjcyMDgzNTM2.Xla7WQ.hk2sJy1KMbMceL8yct-JDnMHJXY'
+TOKEN = 'NjgwODE5MzgxNjcyMDgzNTM2.XlbCbw.VEQHUs-XKZMvKnjM159TK3MMQX0'
 
 bott = Bot(command_prefix='!') #инициализируем бота с префиксом '!'
 @bott.command(pass_context=True) #разрешаем передавать агрументы
