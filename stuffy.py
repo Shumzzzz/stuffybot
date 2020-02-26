@@ -5,7 +5,7 @@ import asyncio
 import random
 import os
 
-TOKEN = os.environ.get('BOT_TOKEN')
+TOKEN = 'NjgwODE5MzgxNjcyMDgzNTM2.XlV4Nw.b78xGe23RsCzcPmFMu0THQ9RRNk'
 
 bott = Bot(command_prefix='!') #инициализируем бота с префиксом '!'
 @bott.command(pass_context=True) #разрешаем передавать агрументы
